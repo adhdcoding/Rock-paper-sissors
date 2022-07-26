@@ -25,7 +25,6 @@ function playRounds(){
 function userRock(){
     userChoice = 'Rock'
     computerChooses()
-    
     if (result == 1){
         console.log('The computer chooses Rock! its a tie!')
     } else if (result == 2){
