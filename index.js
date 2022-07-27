@@ -1,6 +1,7 @@
 let previousChoices = [];
 let computerScore = 0;
 let userScore = 0;
+let userChoice = prompt('whats ya choice')
 const winValues = ["0-2", "1-0", "2-1"];
 
 function choiceToString(n) {
@@ -29,7 +30,6 @@ function playRound(userChoice, compChoice) {
     choiceToString(userChoice);
   }
   console.log(previousChoices);
-  console.log(userScore)
   whoWins()
 }
 
@@ -53,12 +53,5 @@ function whoWins() {
   }
 }
 
-playRound(1,computerChooses())
-playRound(0,2)
-playRound(2,2)
-playRound(1,computerChooses())
-playRound(0,2)
-playRound(2,2)
-playRound(1,computerChooses())
-playRound(0,2)
-playRound(2,2)
+playRound(userChoice,computerChooses())
+
