@@ -1,39 +1,64 @@
-// document.getElementById('rock-btn').addEventListener('click', userRock())
+let previousChoices = [];
+let computerScore = 0;
+let userScore = 0;
+const winValues = ["0-2", "1-0", "2-1"];
 
-
-
-function computerChooses(){
-    result = Math.floor((Math.random() * 3)+1)
-    // if (result == 1){
-    //     message = "The computer chooses Rock"
-    // } else if (result == 2){
-    //     message = "The computer chooses Paper"
-    // } else if (result == 3){
-    //     message = "The computer chooses Sissors"
-    // }
-    return result
+function choiceToString(n) {
+  let result = "";
+  if (n == 0) {
+    result = "Rock";
+  } else if (n == 1) {
+    result = "Paper";
+  } else if (n == 2) {
+    result = "Scissors";
+  }
+  previousChoices.push(result);
+}
+function playRound(userChoice, compChoice) {
+  let roundResult = `${userChoice}-${compChoice}`;
+  if (userChoice == compChoice) {
+    result = "tie";
+    choiceToString(userChoice);
+  } else if (winValues.includes(roundResult)) {
+    ++userScore;
+    result = "you win";
+    choiceToString(userChoice);
+  } else {
+    ++computerScore;
+    result = "you lose";
+    choiceToString(userChoice);
+  }
+  console.log(previousChoices);
+  console.log(userScore)
+  whoWins()
 }
 
-// computerChooses()
-
-function playRounds(){
-    for (i = 0; i <5; i++){
-        console.log(computerChooses())
-    }
+function computerChooses() {
+  result = Math.floor(Math.random() * 3);
+  console.log("computer:", result)
+  return result
 }
 
-function userRock(){
-    userChoice = 'Rock'
-    computerChooses()
-    if (result == 1){
-        console.log('The computer chooses Rock! its a tie!')
-    } else if (result == 2){
-        console.log('The computer chooses Paper! You lose :( ')
-    } else if (result == 3){
-        console.log('The computer chooses Sissors! You win! :D ')
-    }
+function playRounds() {
+  for (i = 0; i < 5; i++) {
+    console.log(computerChooses());
+  }
 }
-userRock()
-function whoWins(){
-    console.log('1')
+
+function whoWins() {
+  if (userScore == 5) {
+    console.log("Congratulations you won the game");
+  } else if (computerScore == 5) {
+    console.log("OH NO! it looks like you lost the game, Try again?");
+  }
 }
+
+playRound(1,computerChooses())
+playRound(0,2)
+playRound(2,2)
+playRound(1,computerChooses())
+playRound(0,2)
+playRound(2,2)
+playRound(1,computerChooses())
+playRound(0,2)
+playRound(2,2)
