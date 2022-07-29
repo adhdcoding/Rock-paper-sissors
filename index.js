@@ -1,8 +1,21 @@
-let previousChoices = [];
+let rockElement = document.getElementById("rock-btn");
+let paperElement = document.getElementById("paper-btn");
+let scissorsElement = document.getElementById("scissors-btn");
+const winValues = ["0-2", "1-0", "2-1"];
+const roundsOutput = document.getElementById("round-output");
+const gameOutput = document.getElementById("game-output");
+
+let previousChoices = [''];
 let computerScore = 0;
 let userScore = 0;
-let userChoice = prompt('whats ya choice')
-const winValues = ["0-2", "1-0", "2-1"];
+let userChoice = 0;
+
+paperElement.addEventListener("click", () => {
+  let choice = 0
+  choiceToString(choice)})
+
+rockElement.addEventListener("click", playRound);
+scissorsElement.addEventListener("click", playRound);
 
 function choiceToString(n) {
   let result = "";
@@ -14,8 +27,11 @@ function choiceToString(n) {
     result = "Scissors";
   }
   previousChoices.push(result);
+  roundsOutput.innerText = `Previous rounds: ${previousChoices} score: ${userScore}`
 }
+// 
 function playRound(userChoice, compChoice) {
+  roundsOutput.innerHTML = `Previous rounds: ${previousChoices}`;
   let roundResult = `${userChoice}-${compChoice}`;
   if (userChoice == compChoice) {
     result = "tie";
@@ -29,29 +45,23 @@ function playRound(userChoice, compChoice) {
     result = "you lose";
     choiceToString(userChoice);
   }
+  
   console.log(previousChoices);
-  whoWins()
+  if (whoWins()) {
+    gameOutput.innerHTML = whoWins();
+  }
 }
-
+// 
 function computerChooses() {
   result = Math.floor(Math.random() * 3);
-  console.log("computer:", result)
-  return result
+  console.log("computer:", result);
+  return result;
 }
-
-function playRounds() {
-  for (i = 0; i < 5; i++) {
-    console.log(computerChooses());
-  }
-}
-
+// 
 function whoWins() {
   if (userScore == 5) {
-    console.log("Congratulations you won the game");
+    return "Congratulations you won the game";
   } else if (computerScore == 5) {
-    console.log("OH NO! it looks like you lost the game, Try again?");
+    return "OH NO! it looks like you lost the game, Try again?";
   }
 }
-
-playRound(userChoice,computerChooses())
-
